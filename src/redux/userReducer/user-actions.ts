@@ -1,13 +1,22 @@
 import axios from "axios";
-
+import { IUserState } from "../../types/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// export const getUser = createAsyncThunk("user/getUser", async (_, thunkApi) => {
-// 	const response = await axios.get<string>(
-// 		"https://6244272539aae3e3b74c25f9.mockapi.io/api/didenok-task/1/teams"
-// 	);
+interface IUserInfo {
+	password: string| undefined;
+	id: number| undefined;
+}
 
-// 	return response.data;
-// });
-
-export const str = "";
+export const changeUserPassword = createAsyncThunk("user/changeUserPassword", async (userInfo : IUserInfo) => {
+	try {
+		const response = await axios.put<{ password: string; id: number }>(
+			`https://625ac5f3398f3bc782a612de.mockapi.io/users/${userInfo.id}`,
+			{
+				password: `${userInfo.password}`,
+			}
+		);
+		return response.data;
+	} catch (err) {
+		console.log(err);
+	}
+});

@@ -41,12 +41,17 @@ const RegisterPage: React.FC = () => {
 
 		const collectedErrors = [];
 
-		!data.login.includes("@") && collectedErrors.push("Некорректно введен Email");
+		if (!data.login.includes("@")) {
+			collectedErrors.push("Некорректно введен Email");
+		}
 
-		data.password.toLowerCase() === data.password &&
+		if (data.password.toLowerCase() === data.password) {
 			collectedErrors.push("Пароль должен содержать как минимум одну заглавную букву");
+		}
 
-		data.password !== data.passwordRepeat && collectedErrors.push("Пароли не совпадают");
+		if (data.password !== data.passwordRepeat) {
+			collectedErrors.push("Пароли не совпадают");
+		}
 
 		newError(collectedErrors);
 
@@ -57,7 +62,7 @@ const RegisterPage: React.FC = () => {
 
 		((isBtnActive) => changeBtnActive(!isBtnActive))();
 	});
-
+	console.log("делаю юзера")
 	return (
 		<Wraper as="form" onSubmit={onSubmit}>
 			{formErrors.map((err) => (

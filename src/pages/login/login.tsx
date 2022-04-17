@@ -62,7 +62,6 @@ const LoginPage = () => {
 
 		((isBtnActive) => changeBtnActive(!isBtnActive))();
 	});
-	console.log(formErrors);
 
 	return (
 		<>

@@ -8,5 +8,5 @@ export type FormData = {
 export interface IUserState {
 	mail: string | undefined;
 	password: string | undefined;
-	id: string | undefined;
+	id: number | undefined;
 }

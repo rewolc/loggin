@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserState } from "../../types/types";
-
+import { changeUserPassword } from "./user-actions";
 const initialState: IUserState = {
-	id: "",
+	id: 0,
 	mail: "",
 	password: "",
 };
@@ -15,7 +15,11 @@ export const userSlice = createSlice({
 			return action.payload;
 		},
 	},
-	extraReducers: {},
+	extraReducers: {
+		[changeUserPassword.fulfilled.type]: (state, action: PayloadAction<IUserState>) => {
+			return action.payload;
+		},
+	},
 });
 
 export default userSlice.reducer;
