@@ -17,4 +17,3 @@ export const LoginLabel = styled.label`
 export const LoginLabelText = styled.span`
 	font-size: 14px;
 `;
-

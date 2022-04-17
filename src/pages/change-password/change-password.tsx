@@ -1,22 +1,28 @@
-import { FormComponent } from "../../components/form/form";
-import { WarningComponent } from "../../components/warning/warning";
-import { Wraper, Button } from "../../styled-components/common-styles";
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "../../redux/actions";
-
 import { useAppSelector } from "../../redux/actions";
+
+import { FormComponent } from "../../components/form/form";
+import { WarningComponent } from "../../components/warning/warning";
+import { Wraper, Button } from "../../styled-components/common-styles";
+
 import { changeUserPassword } from "../../redux/userReducer/user-actions";
 
 import { FormData } from "../../types/types";
+
+
 const ChangePasswordPage: React.FC<any> = () => {
+
 	const changePasswordForm = ["password", "newPassword", "passwordRepeat"];
+
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
+
 	const [changePasswordErrors, newError] = useState<string>();
 	const [isBtnActive, changeBtnActive] = useState(true);
+	
 	const { password, id } = useAppSelector((state) => state.userReducer);
 
 	const {

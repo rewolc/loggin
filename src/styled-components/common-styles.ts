@@ -3,11 +3,13 @@ import { AppWraper } from "./App-styled";
 import { Inpt } from "../components/form/form-styled";
 
 export const HeaderText = styled.h1`
-	cursor: pointer;
 	color: black;
-	margin: 40px 20px 0 auto;
+	margin: auto;
 	font-size: 64px;
 	font-weight: 700;
+	div {
+		text-align: center;
+	}
 `;
 
 export const Wraper = styled(AppWraper)`
@@ -51,10 +53,9 @@ export const Button = styled(Inpt).attrs({
 	font-weight: 700;
 	margin-top: 40px;
 	cursor: ${(props) => (props.active ? "pointer" : "default")};
-	
 
 	&:hover {
-		${(props) => (props.active ? "background-color : #4a67ff" : "background-color : #606a9f")};
+		${(props) => (props.active ? "background-color :#0d65c1" : "background-color : #606a9f")};
 	}
 `;
 
@@ -66,11 +67,11 @@ export const UnderButtonText = styled.div`
 	justify-content: center;
 	span {
 		cursor: pointer;
-		color: #4a67ff;
+		color: #4a67ffba;
 		padding-left: 5px;
 		transition: all 0.7s;
 		&:hover {
-			color: #d0a900;
+			color: #001dff;
 		}
 	}
 `;

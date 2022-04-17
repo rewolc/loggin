@@ -1,14 +1,20 @@
-import { EnteredWraper, EnteredText, EnteredButton } from "./entered-styled";
+import { userSlice } from "../../redux/userReducer/user-reducer";
+import { useAppSelector, useAppDispatch } from "../../redux/actions";
 
 import { useNavigate } from "react-router";
 
-import { useAppSelector } from "../../redux/actions";
-
 import { Storage } from "../../local-storage/local-storage";
 
+import { EnteredWraper, EnteredText, EnteredButton } from "./entered-styled";
+
 const EnteredPage: React.FC = () => {
+
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	
+	const { removeUser } = userSlice.actions;
 	const { mail } = useAppSelector((state) => state.userReducer);
+	
 	return (
 		<EnteredWraper>
 			<EnteredText>
@@ -18,6 +24,7 @@ const EnteredPage: React.FC = () => {
 				value="Выйти"
 				onClick={() => {
 					navigate("/login");
+					dispatch(removeUser());
 					Storage.clear();
 				}}
 			/>

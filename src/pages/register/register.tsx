@@ -11,9 +11,11 @@ import { useNavigate } from "react-router";
 import { FormData } from "../../types/types";
 
 const RegisterPage: React.FC = () => {
+
 	const registerForm = ["login", "password", "passwordRepeat"];
 
 	const navigate = useNavigate();
+
 	const [formErrors, newError] = useState<string[]>([]);
 	const [isBtnActive, changeBtnActive] = useState(true);
 
@@ -57,12 +59,12 @@ const RegisterPage: React.FC = () => {
 
 		if (!collectedErrors[0]) {
 			await newUser(data.login, data.password);
-			navigate("/");
+			navigate("/login");
 		}
 
 		((isBtnActive) => changeBtnActive(!isBtnActive))();
 	});
-	console.log("делаю юзера");
+
 	return (
 		<Wraper as="form" onSubmit={onSubmit}>
 			{formErrors.map((err) => (
@@ -85,7 +87,7 @@ const RegisterPage: React.FC = () => {
 			<Button value="Зарегестрироваться" active={isBtnActive} disabled={!isBtnActive} />
 
 			<UnderButtonText>
-				Есть аккаунт? <span onClick={() => navigate("/")}> Войти </span>
+				Есть аккаунт? <span onClick={() => navigate("/login")}> Войти </span>
 			</UnderButtonText>
 		</Wraper>
 	);

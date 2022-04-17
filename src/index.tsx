@@ -1,10 +1,9 @@
 import App from "./App";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import { setupStore } from "./redux/store";
-
+import { BrowserRouter } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
 const store = setupStore();

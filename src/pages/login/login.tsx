@@ -2,12 +2,9 @@ import axios from "axios";
 
 import { FormData } from "../../types/types";
 
-import { user } from "../../texts/texts";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-
-import { Storage } from "../../local-storage/local-storage";
 
 import { userSlice } from "../../redux/userReducer/user-reducer";
 import { useAppDispatch } from "../../redux/actions";
@@ -18,16 +15,22 @@ import { Wraper, Button, UnderButtonText } from "../../styled-components/common-
 
 import { LoginCheckbox, LoginLabel, LoginLabelText } from "./login-styled";
 import { IUserState } from "../../types/types";
+
 const LoginPage = () => {
+
+	const Storage = window.localStorage;
 	const formsLogin = ["login", "password"];
 
-	const dispatch = useAppDispatch();
-	const { addUser } = userSlice.actions;
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+
+	const { addUser } = userSlice.actions;
+
+	const [remember, changeRemember] = useState(false);
 	const [formErrors, newError] = useState<string>();
 	const [isBtnActive, changeBtnActive] = useState(true);
 
-	const findUser = async (mail: string, password?: string) => {
+	const findUser = async (mail: string) => {
 		try {
 			const response = await axios.get<IUserState[]>(
 				"https://625ac5f3398f3bc782a612de.mockapi.io/users"
@@ -45,9 +48,6 @@ const LoginPage = () => {
 	} = useForm<FormData>({
 		mode: "onChange",
 	});
-	const Storage = window.localStorage;
-
-	const [remember, changeRemember] = useState(false);
 
 	const onSubmit = handleSubmit(async (data) => {
 		changeBtnActive(!isBtnActive);
@@ -72,7 +72,7 @@ const LoginPage = () => {
 
 		((isBtnActive) => changeBtnActive(!isBtnActive))();
 	});
-	console.log(remember);
+
 	return (
 		<>
 			<Wraper as="form" onSubmit={onSubmit}>
@@ -88,12 +88,12 @@ const LoginPage = () => {
 
 				<LoginLabel>
 					<LoginCheckbox onClick={() => changeRemember(!remember)} />
-					<LoginLabelText>Запомнить </LoginLabelText>
+					<LoginLabelText>Запомнить</LoginLabelText>
 				</LoginLabel>
 
 				<Button value="Войти" active={isBtnActive} disabled={!isBtnActive} />
 				<UnderButtonText>
-					Еще нет аккаунта? <span onClick={() => navigate("/register")}> Регистрация </span>
+					Еще нет аккаунта?<span onClick={() => navigate("/register")}> Создать аккаунт </span>
 				</UnderButtonText>
 			</Wraper>
 		</>

@@ -1,11 +1,11 @@
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
+import { useAppSelector } from "../../redux/actions";
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu, { MenuProps } from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import LoginIcon from "@mui/icons-material/Login";
-import Divider from "@mui/material/Divider";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import MoodIcon from "@mui/icons-material/Mood";
 import BlurCircularIcon from "@mui/icons-material/BlurCircular";
@@ -50,13 +50,18 @@ const StyledMenu = styled((props: MenuProps) => (
 
 const CustomizedMenu = () => {
 	const navigate = useNavigate();
+	const { id } = useAppSelector((state) => state.userReducer);
+
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
 	};
 	const handleClose = (event: React.MouseEvent<HTMLElement>) => {
-		navigate(`/${event.currentTarget.textContent?.toLowerCase().split(" ").join("")}`);
+		const toLocation = event.currentTarget.textContent?.toLowerCase().split(" ").join("");
+		if (toLocation) {
+			navigate(`/${toLocation}`);
+		}
 		setAnchorEl(null);
 	};
 
@@ -74,6 +79,7 @@ const CustomizedMenu = () => {
 			>
 				Меню
 			</Button>
+
 			<StyledMenu
 				id="customized-menu"
 				MenuListProps={{
@@ -83,23 +89,29 @@ const CustomizedMenu = () => {
 				open={open}
 				onClose={handleClose}
 			>
-				<MenuItem onClick={handleClose} disableRipple>
-					<LoginIcon />
-					Login
-				</MenuItem>
-				<MenuItem onClick={handleClose} disableRipple>
-					<MoodIcon />
-					Register
-				</MenuItem>
-				<Divider sx={{ my: 0.5 }} />
-				<MenuItem onClick={handleClose} disableRipple>
-					<BlurCircularIcon />
-					Entered
-				</MenuItem>
-				<MenuItem onClick={handleClose} disableRipple>
-					<ManageAccountsIcon />
-					Change password
-				</MenuItem>
+				{!Boolean(id) ? (
+					<div>
+						<MenuItem onClick={handleClose} disableRipple>
+							<LoginIcon />
+							Login
+						</MenuItem>
+						<MenuItem onClick={handleClose} disableRipple>
+							<MoodIcon />
+							Register
+						</MenuItem>
+					</div>
+				) : (
+					<div>
+						<MenuItem onClick={handleClose} disableRipple>
+							<BlurCircularIcon />
+							Entered
+						</MenuItem>
+						<MenuItem onClick={handleClose} disableRipple>
+							<ManageAccountsIcon />
+							Change password
+						</MenuItem>
+					</div>
+				)}
 			</StyledMenu>
 		</div>
 	);
