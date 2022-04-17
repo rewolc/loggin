@@ -4,7 +4,7 @@ import { AppWraper } from "../../styled-components/App-styled";
 import { Inpt } from "../../components/form/form-styled";
 
 export const EnteredWraper = styled(AppWraper)`
-	margin-top: 342px;
+	margin-top: 200px;
 `;
 
 export const EnteredText = styled.p`
