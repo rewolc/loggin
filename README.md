@@ -26,7 +26,7 @@
 > _password_ as password
 
 ### Deploy
-> I've deployed it on _https://loggin.vercel.app/_ 
+> I've deployed it on _https://loggin.vercel.app_ 
 > 
 > Try it for yourself!
 
