@@ -8,4 +8,3 @@ export const WarningComponent: React.FC<{ text: string }> = ({ text }) => {
 		</Warning>
 	);
 };
-

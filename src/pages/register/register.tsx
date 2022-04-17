@@ -1,17 +1,17 @@
+import axios from "axios";
+
 import { FormComponent } from "../../components/form/form";
 import { WarningComponent } from "../../components/warning/warning";
 import { Wraper, Button, UnderButtonText } from "../../styled-components/common-styles";
-import { useState } from "react";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
 import { FormData } from "../../types/types";
 
-import axios from "axios";
-
 const RegisterPage: React.FC = () => {
-	const formsRegister = ["login", "password", "passwordRepeat"];
+	const registerForm = ["login", "password", "passwordRepeat"];
 
 	const navigate = useNavigate();
 	const [formErrors, newError] = useState<string[]>([]);
@@ -32,7 +32,7 @@ const RegisterPage: React.FC = () => {
 				password: `${password}`,
 			});
 		} catch (err) {
-			console.log(err);
+			newError([...formErrors, "Ошибка сервера"]);
 		}
 	};
 
@@ -63,7 +63,7 @@ const RegisterPage: React.FC = () => {
 			{formErrors.map((err) => (
 				<WarningComponent key={err.length} text={err} />
 			))}
-			{formsRegister.map((form, indx) => (
+			{registerForm.map((form, indx) => (
 				<FormComponent
 					register={register}
 					form={form}
@@ -87,5 +87,3 @@ const RegisterPage: React.FC = () => {
 };
 
 export default RegisterPage;
-
-

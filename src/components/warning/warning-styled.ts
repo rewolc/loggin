@@ -24,5 +24,3 @@ export const Warning = styled(Inpt)<WarningProps>`
 export const WarningText = styled.span`
 	font-size: 14px;
 `;
-
-

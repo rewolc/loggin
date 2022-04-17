@@ -5,7 +5,7 @@ import { Inpt } from "../components/form/form-styled";
 export const HeaderText = styled.h1`
 	cursor: pointer;
 	color: black;
-	margin: 40px auto 0 20px;
+	margin: 40px 20px 0 auto;
 	font-size: 64px;
 	font-weight: 700;
 `;
@@ -73,4 +73,3 @@ export const UnderButtonText = styled.div`
 		}
 	}
 `;
-

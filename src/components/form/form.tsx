@@ -8,7 +8,7 @@ export const FormComponent: React.FC<{
 	return (
 		<>
 			<UpperFormText>
-				{form === "login" ? "Логин" : form === "password" ? "Пароль" : "Повторите пароль"}
+				{form === "login" ? "Логин" : form === "password" ? "Пароль" : form === 'newPassword' ? "Новый пароль" : "Повторите пароль"}
 			</UpperFormText>
 			<Inpt
 				filled={message}
@@ -26,5 +26,3 @@ export const FormComponent: React.FC<{
 		</>
 	);
 };
-
-

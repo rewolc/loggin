@@ -7,4 +7,3 @@ export const AppWraper = styled.div`
 	flex-direction: column;
 	align-items: center;
 `;
-

@@ -1,9 +1,13 @@
-import ReactDOM from "react-dom";
 import App from "./App";
-
+import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
+import { Provider } from "react-redux";
+import { setupStore } from "./redux/store";
+
 import { createGlobalStyle } from "styled-components";
+
+const store = setupStore();
 
 const Global = createGlobalStyle`
  * {
@@ -14,12 +18,12 @@ const Global = createGlobalStyle`
 }
 `;
 ReactDOM.render(
-  <BrowserRouter>
-    <Global />
-    <App />
-  </BrowserRouter>,
+	<Provider store={store}>
+		<BrowserRouter>
+			<Global />
+			<App />
+		</BrowserRouter>
+	</Provider>,
 
-  document.getElementById("root")
+	document.getElementById("root")
 );
-
-

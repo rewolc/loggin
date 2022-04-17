@@ -1,26 +1,40 @@
-import { FormComponent } from "../../components/form/form";
-import { WarningComponent } from "../../components/warning/warning";
-import { Wraper, Button, UnderButtonText } from "../../styled-components/common-styles";
+import axios from "axios";
+
+import { FormData } from "../../types/types";
 
 import { user } from "../../texts/texts";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
+import { userSlice } from "../../redux/userReducer/user-reducer";
+import { useAppDispatch } from "../../redux/actions";
+
+import { FormComponent } from "../../components/form/form";
+import { WarningComponent } from "../../components/warning/warning";
+import { Wraper, Button, UnderButtonText } from "../../styled-components/common-styles";
+
 import { LoginCheckbox, LoginLabel, LoginLabelText } from "./login-styled";
-
-import { FormData } from "../../types/types";
-
+import { IUserState } from "../../types/types";
 const LoginPage = () => {
-	const navigate = useNavigate();
+	const formsLogin = ["login", "password"];
 
-	const [login, enteredLogin] = useState("");
-	const [password, enteredPassword] = useState("");
+	const dispatch = useAppDispatch();
+	const { addUser } = userSlice.actions;
+	const navigate = useNavigate();
+	const [formErrors, newError] = useState<string>();
 	const [isBtnActive, changeBtnActive] = useState(true);
 
-	const sleep = (time: number) => new Promise((resolve) => setTimeout(resolve, time));
-
-	const formsLogin = ["login", "password"];
+	const findUser = async (mail: string, password?: string) => {
+		try {
+			const response = await axios.get<IUserState[]>(
+				"https://625ac5f3398f3bc782a612de.mockapi.io/users"
+			);
+			return response.data.find((user) => user.mail === mail);
+		} catch (err) {
+			newError("Ошибка сервера");
+		}
+	};
 
 	const {
 		register,
@@ -32,25 +46,28 @@ const LoginPage = () => {
 
 	const onSubmit = handleSubmit(async (data) => {
 		changeBtnActive(!isBtnActive);
-		await sleep(Math.random() * 3000);
-		enteredLogin(data.login);
-		enteredPassword(data.password);
+
+		const isUser: IUserState | undefined = await findUser(data.login);
+
+		if (isUser) {
+			if (isUser.password === data.password) {
+				dispatch(addUser(isUser));
+				navigate("/entered");
+			} else {
+				newError("Неверный пароль");
+			}
+		} else {
+			newError("Пользователь не найден");
+		}
+
 		((isBtnActive) => changeBtnActive(!isBtnActive))();
 	});
+	console.log(formErrors);
 
 	return (
 		<>
 			<Wraper as="form" onSubmit={onSubmit}>
-				{login &&
-					(login === user.login ? (
-						password === user.password ? (
-							navigate("/entered")
-						) : (
-							<WarningComponent text={"Неверный пароль"} />
-						)
-					) : (
-						<WarningComponent text={`Пользователя ${login} не существует`} />
-					))}
+				{formErrors && <WarningComponent key={formErrors.length} text={formErrors} />}
 				{formsLogin.map((form, indx) => (
 					<FormComponent
 						register={register}
@@ -75,4 +92,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
