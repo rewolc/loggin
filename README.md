@@ -15,6 +15,7 @@
 ### Warnings
 
 >To register you have to fill an email _(@ required)_  and password _( with min and max length )_
+>
 >If you will breake one of the upper rules, you will see a warning message. 
 
 ### If you don't want to register
