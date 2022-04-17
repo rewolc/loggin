@@ -21,11 +21,13 @@
 
 >You can use 
 > _steve.jobs@example.com_ as loggin
+> 
 > _password_ as password
 
 ### Deploy
 > I've deployed it on _https://loggin.vercel.app/_ 
->Try it for yourself!
+> 
+> Try it for yourself!
 
 ### Installation and Setup Instructions
 
