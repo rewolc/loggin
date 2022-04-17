@@ -50,5 +50,7 @@ To Visit App:
 
 `localhost:3000`
 
+![Screenshot_2](https://user-images.githubusercontent.com/95301875/163735358-3f675826-cc23-4350-ae85-f809cad909d1.png)
 
+![Screenshot_3](https://user-images.githubusercontent.com/95301875/163735362-03e8a037-0ea0-415d-a748-008c5104e3b1.png)
 
