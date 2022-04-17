@@ -62,7 +62,7 @@ const RegisterPage: React.FC = () => {
 
 		((isBtnActive) => changeBtnActive(!isBtnActive))();
 	});
-	console.log("делаю юзера")
+	console.log("делаю юзера");
 	return (
 		<Wraper as="form" onSubmit={onSubmit}>
 			{formErrors.map((err) => (

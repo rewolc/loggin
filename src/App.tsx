@@ -8,18 +8,41 @@ import ChangePasswordPage from "./pages/change-password/change-password";
 import { AppWraper } from "./styled-components/App-styled";
 import { HeaderText } from "./styled-components/common-styles";
 
-import { useLocation } from "react-router";
+import CustomizedMenu from "./components/menu/menu";
+import { Storage } from "./local-storage/local-storage";
+
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router";
+import { useAppDispatch } from "./redux/actions";
+import { userSlice } from "./redux/userReducer/user-reducer";
 
 const App: React.FC = () => {
+	const navigate = useNavigate();
 	const location = useLocation().pathname;
+	const dispatch = useAppDispatch();
+	const { addUser } = userSlice.actions;
+	useEffect(() => {
+		if (Storage.length) {
+			dispatch(
+				addUser({
+					mail: Storage.getItem("mail")!,
+					password: Storage.getItem("password")!,
+					id: Storage.getItem("id")!,
+				})
+			);
+		}
+		location === "/" && navigate("/login");
+	});
+
 	return (
 		<AppWraper>
 			<HeaderText>
-				{location === "/" ? "Loggin." : location === "/register" ? "Register." : "Logged."}
+				<CustomizedMenu />
+				{location === "/login" ? "Loggin." : location === "/register" ? "Register." : "Logged."}
 			</HeaderText>
 			<Routes>
 				<Route path="/changePassword" element={<ChangePasswordPage key={"changePassword"} />} />
-				<Route path="/" element={<LoginPage key={"login"} />} />
+				<Route path="/login" element={<LoginPage key={"login"} />} />
 				<Route path="/entered" element={<EnteredPage key={"entered"} />} />
 				<Route path="/register" element={<RegisterPage key={"register"} />} />
 			</Routes>

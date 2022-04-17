@@ -6,7 +6,7 @@ export type FormData = {
 };
 
 export interface IUserState {
-	mail: string | undefined;
-	password: string | undefined;
-	id: number | undefined;
+	mail: string;
+	password: string;
+	id: string;
 }

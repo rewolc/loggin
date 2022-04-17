@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
+import { Storage } from "../../local-storage/local-storage";
+
 import { userSlice } from "../../redux/userReducer/user-reducer";
 import { useAppDispatch } from "../../redux/actions";
 
@@ -43,6 +45,9 @@ const LoginPage = () => {
 	} = useForm<FormData>({
 		mode: "onChange",
 	});
+	const Storage = window.localStorage;
+
+	const [remember, changeRemember] = useState(false);
 
 	const onSubmit = handleSubmit(async (data) => {
 		changeBtnActive(!isBtnActive);
@@ -52,6 +57,11 @@ const LoginPage = () => {
 		if (isUser) {
 			if (isUser.password === data.password) {
 				dispatch(addUser(isUser));
+				if (remember) {
+					Storage.setItem("mail", isUser.mail);
+					Storage.setItem("password", isUser.password);
+					Storage.setItem("id", isUser.id);
+				}
 				navigate("/entered");
 			} else {
 				newError("Неверный пароль");
@@ -62,7 +72,7 @@ const LoginPage = () => {
 
 		((isBtnActive) => changeBtnActive(!isBtnActive))();
 	});
-
+	console.log(remember);
 	return (
 		<>
 			<Wraper as="form" onSubmit={onSubmit}>
@@ -77,8 +87,8 @@ const LoginPage = () => {
 				))}
 
 				<LoginLabel>
-					<LoginCheckbox />
-					<LoginLabelText>Запомнить пароль</LoginLabelText>
+					<LoginCheckbox onClick={() => changeRemember(!remember)} />
+					<LoginLabelText>Запомнить </LoginLabelText>
 				</LoginLabel>
 
 				<Button value="Войти" active={isBtnActive} disabled={!isBtnActive} />

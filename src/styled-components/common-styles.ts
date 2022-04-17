@@ -43,7 +43,7 @@ interface ButtonProps {
 export const Button = styled(Inpt).attrs({
 	type: "submit",
 })<ButtonProps>`
-	background-color: ${(props) => (props.active ? "#4a67ff" : "#606a9f;")};
+	background-color: ${(props) => (props.active ? "#1976d2;" : "#606a9f;")};
 	padding: 0;
 	text-align: center;
 	color: white;
@@ -51,6 +51,7 @@ export const Button = styled(Inpt).attrs({
 	font-weight: 700;
 	margin-top: 40px;
 	cursor: ${(props) => (props.active ? "pointer" : "default")};
+	
 
 	&:hover {
 		${(props) => (props.active ? "background-color : #4a67ff" : "background-color : #606a9f")};
