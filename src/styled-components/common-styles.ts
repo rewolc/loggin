@@ -4,7 +4,7 @@ import { Inpt } from "../components/form/form-styled";
 
 export const HeaderText = styled.h1`
 	color: black;
-	margin: auto;
+	margin-top: 10px;
 	font-size: 64px;
 	font-weight: 700;
 	div {

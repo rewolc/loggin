@@ -49,10 +49,16 @@ const App: React.FC = () => {
 	return (
 		<AppWraper>
 			<HeaderText>
+				{location === "/login"
+					? "Loggin."
+					: location === "/register"
+					? "Register."
+					: location === "/entered"
+					? "Entered."
+					: "Changing."}
 				<div>
 					<CustomizedMenu />
 				</div>
-				{location === "/login" ? "Loggin." : location === "/register" ? "Register." : "Logged."}
 			</HeaderText>
 			<Routes>
 				<Route path="/changepassword" element={<ChangePasswordPage key={"changePassword"} />} />
