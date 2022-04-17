@@ -1,6 +1,6 @@
 # Auth Application
 
-###### This is an auth application, where you can register, login and change password of your user
+###### This is an auth application with _adaptive layout_ , where you can register, login and change password of your user
  
  ### Stack 
 
@@ -14,10 +14,23 @@
 
 ### Warnings
 
->To register you have to fill an email (@ required)  and password ( with min and max length )
+>To register you have to fill an email _(@ required)_  and password _( with min and max length )_
+>
 >If you will breake one of the upper rules, you will see a warning message. 
 
-## Installation and Setup Instructions
+### If you don't want to register
+
+>You can use 
+> _steve.jobs@example.com_ as loggin
+> 
+> _password_ as password
+
+### Deploy
+> I've deployed it on _https://loggin.vercel.app/_ 
+> 
+> Try it for yourself!
+
+### Installation and Setup Instructions
 
 Clone down this repository. You will need  `node` and `npm` installed globally on your machine.
 
